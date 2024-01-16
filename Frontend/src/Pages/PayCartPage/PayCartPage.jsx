@@ -64,7 +64,7 @@ const PayCartPage = () => {
       try {
         // Hacer la llamada a la API solo si el formulario está completo
         if (formComplete) {
-          const response = await fetch(`${URLBACK}/api/cart/:cid/purchase`, {
+          const response = await fetch(`${URLBACK}/api/carts/:cid/purchase`, {
             method: "get",
             headers: {
               "Content-type": "application/json",

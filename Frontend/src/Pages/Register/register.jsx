@@ -37,7 +37,7 @@ const RegisterPage = ({ setButtonState }) => {
       return null, false;
     } else {
       console.log(RegisteredUsers);
-      const response = await fetch(`${URLBACK}/api/sessions/register`, {
+      const response = await fetch(`${URLBACK}/api/session/register`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

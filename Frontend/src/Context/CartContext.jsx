@@ -26,7 +26,7 @@ const CartProvider = ({ children }) => {
       if (!cartId) {
         console.log("Error al obtener el carrito:");
       } else {
-        const response = await fetch(`${URLBACK}/api/cart/${cartId}`);
+        const response = await fetch(`${URLBACK}/api/carts/${cartId}`);
         if (!response.ok) {
           throw new Error("Error al obtener el carrito con FETCH");
         }
@@ -48,7 +48,7 @@ const CartProvider = ({ children }) => {
       }
 
       const response = await fetch(
-        `${URLBACK}/api/cart/${cartId}/product/${product._id}`,
+        `${URLBACK}/api/carts/${cartId}/product/${product._id}`,
         {
           method: "POST",
           headers: {
@@ -77,7 +77,7 @@ const CartProvider = ({ children }) => {
       }
 
       const response = await fetch(
-        `${URLBACK}/api/cart/${cartId}/product/${productId}`,
+        `${URLBACK}/api/carts/${cartId}/product/${productId}`,
         {
           method: "PUT",
           body: { quantity: 0 },
@@ -105,7 +105,7 @@ const CartProvider = ({ children }) => {
       }
 
       // Limpiar el carrito en el servidor
-      fetch(`${URLBACK}/api/cart/${cartId}`, {
+      fetch(`${URLBACK}/api/carts/${cartId}`, {
         method: "DELETE",
       });
 

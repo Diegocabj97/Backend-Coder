@@ -39,7 +39,7 @@ const LoginPage = ({ setButtonState }) => {
     }
 
     try {
-      const response = await fetch(`${URLBACK}/api/sessions/login`, {
+      const response = await fetch(`${URLBACK}/api/session/login`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

@@ -29,7 +29,7 @@ const NavBarImport = ({
   const handleOnSubmit = async (e) => {
     logout();
     e.preventDefault();
-    const response = await fetch(`${URLBACK}/api/sessions/logout`, {
+    const response = await fetch(`${URLBACK}/api/session/logout`, {
       method: "GET",
       credentials: "include",
     });
