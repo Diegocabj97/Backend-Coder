@@ -125,7 +125,7 @@ const initializePassport = () => {
 
 //GITHUB
 
-passport.use(
+/* passport.use(
   "github",
   new githubStrategy(
     {
@@ -156,6 +156,6 @@ passport.use(
       }
     }
   )
-);
+); */
 
 export default initializePassport;

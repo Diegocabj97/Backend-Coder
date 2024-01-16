@@ -4,7 +4,7 @@
   "type": "module",
   "main": "main.js",
   "scripts": {
-    "dev": "nodemon src/main.js",
+    "dev": "nodemon Backend/src/main.js",
     "test": "mocha test/usertest.test.js",
     "chai": "mocha test/userChai.test.js",
     "supertest": "mocha test/supertest.test.js"
