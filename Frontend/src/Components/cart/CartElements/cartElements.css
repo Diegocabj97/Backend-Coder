@@ -1,0 +1,60 @@
+.cartItem {
+  width: 90%;
+  height: 30%;
+  display: flex;
+  flex-direction: row;
+  max-width: 90%;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+.cartItemImg {
+  width: 50%;
+  margin-right: 5px;
+}
+.cartItemName {
+  position: relative;
+  font-size: 20px;
+  margin-right: 20px;
+  min-width: 148px;
+  max-width: 148px;
+}
+.cartItemPrice {
+  position: relative;
+  font-size: 20px;
+  margin-right: 20px;
+  max-width: 75px;
+  width: 75px;
+  height: 25px;
+}
+
+.rmvBtn {
+  position: relative;
+  align-items: center;
+  width: 40px;
+  height: 30px;
+  color: red;
+  font-size: 15px;
+}
+.cartItemQuantity {
+  display: flex;
+  text-align: center;
+  flex-direction: row;
+  font-size: 20px;
+  height: 25px;
+  max-width: 110px;
+}
+.BtnAgregar {
+  display: flex;
+  padding: 10px;
+  flex-direction: row;
+  height: 60px;
+  max-width: 75px;
+}
+.BtnRestar {
+  display: flex;
+  padding: 10px;
+  flex-direction: row;
+  height: 60px;
+  max-width: 75px;
+}
