@@ -22,14 +22,14 @@ import SearchPage from "./Pages/SearchPage/SearchPage";
 import PayCartPage from "./Pages/PayCartPage/PayCartPage";
 import RegisterPage from "./Pages/Register/register.jsx";
 import LoginPage from "./Pages/Login/login.jsx";
-import NewProduct from "./Pages/NewProduct/newProduct.jsx";
-
+import NewProduct from "./Pages/NewProduct/NewProduct.jsx";
 // ////////////////////////FIREBASE///////////////////////////
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../src/firebase/firebaseConfig";
 import ProdCreated from "./Pages/NewProduct/ProdCreated";
 
-export const URLBACK = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
+export const URLBACK =
+  import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
 const App = () => {
   const [ButtonState, setButtonState] = useState(false);
   const [products, setProducts] = useState([]);
