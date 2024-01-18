@@ -61,25 +61,25 @@ describe("Test CRUD de productos de la ruta api/products", function () {
 // SESSIONS TEST
 describe("Test CRUD de sessions de la ruta api/sessions", function () {
   let cookie = "";
-  it("Ruta api/sessions/register con metodo POST", async () => {
+  it("Ruta api/session/register con metodo POST", async () => {
     const newUser = {
       first_name: "test",
       last_name: "test",
-      email: "test95@test.com",
+      email: "test91@test.com",
       password: "Test123",
     };
     const response = await requester
-      .post("/api/sessions/register")
+      .post("/api/session/register")
       .send(newUser);
     expect(response.body.status).to.be.equal("success");
   });
-  it("Ruta api/sessions/login con metodo POST", async () => {
+  it("Ruta api/session/login con metodo POST", async () => {
     const loginUser = {
-      email: "test95@test.com",
+      email: "test91@test.com",
       password: "Test123",
     };
     const resultado = await requester
-      .post("/api/sessions/login")
+      .post("/api/session/login")
       .send(loginUser);
     const cookieResult = resultado.headers["set-cookie"][0];
     expect(cookieResult).to.be.ok;
@@ -91,29 +91,29 @@ describe("Test CRUD de sessions de la ruta api/sessions", function () {
     expect(cookie.value).to.be.ok;
   });
 
-  it("Ruta api/sessions/current con metodo GET", async () => {
+  it("Ruta api/session/current con metodo GET", async () => {
     const { _body } = await requester
-      .get("/api/sessions/current")
+      .get("/api/session/current")
       .set("Cookie", [`${cookie.name} = ${cookie.value}`]);
-    expect(_body.user.email).to.be.equal("test95@test.com");
+    expect(_body.user.email).to.be.equal("test91@test.com");
   });
 });
 
 // CARTS TEST
 describe("Test CRUD de sessions de la ruta api/cart", function () {
   it("Ruta:api/cart metodo GET", async () => {
-    const response = await requester.get("/api/cart");
+    const response = await requester.get("/api/carts");
     expect(response.body.status).to.be.equal("success");
   });
   it("Ruta:api/cart metodo GET By ID", async () => {
     const cid = "659e9eeb4926c34d691137c6";
-    const response = await requester.get(`/api/cart/${cid}`);
+    const response = await requester.get(`/api/carts/${cid}`);
     expect(response.body.status).to.be.equal("success");
     expect(response.body.payload._id).to.be.equal("659e9eeb4926c34d691137c6");
   });
   it("Ruta:api/cart metodo GET By ID", async () => {
     const cid = "659e9eeb4926c34d691137c6";
-    const response = await requester.get(`/api/cart/${cid}`);
+    const response = await requester.get(`/api/carts/${cid}`);
     expect(response.body.status).to.be.equal("success");
     expect(response.body.payload._id).to.be.equal("659e9eeb4926c34d691137c6");
   });
@@ -125,14 +125,14 @@ describe("Test CRUD de sessions de la ruta api/cart", function () {
       quantity: 5,
     };
     const { statusCode, _body } = await requester
-      .post(`/api/cart/${cid}/product/${pid}`)
+      .post(`/api/carts/${cid}/product/${pid}`)
       .send(prodQuantity);
     expect(statusCode).to.be.equal(200);
     expect(_body.status).to.be.equal("success");
   });
   it("Ruta:api/cart metodo DELETE By ID", async () => {
     const cid = "659e9eeb4926c34d691137c6";
-    const response = await requester.delete(`/api/cart/${cid}`);
+    const response = await requester.delete(`/api/carts/${cid}`);
     expect(response.body.status).to.be.equal("success");
   });
 });

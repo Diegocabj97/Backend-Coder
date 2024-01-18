@@ -25,7 +25,6 @@ export const passportError = (strategy) => {
 export const authorization = (role) => {
   //rol = 'Admin' desde ruta 'Crear Producto'
   return async (req, res, next) => {
-    console.log(req.user);
     if (!req.user) {
       return res
         .status(401)

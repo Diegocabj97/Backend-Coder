@@ -16,30 +16,40 @@ export const login = async (req, res) => {
           email: req.user.email
           res.status(200).send({mensaje: "Usuario logueado"})
       }*/
+
     if (!req.cookies.jwtCookie) {
-      const userCart = req.user.cart;
+      const userCart = JSON.stringify(req.user.cart);
+      const userEmail = JSON.stringify(req.user.email);
       const token = generateToken(req.user);
-      res.cookie("jwtCookie", token, {
-        maxAge: 86400000,
-        HttpOnly: true,
-      });
+      console.log("Has iniciado sesion, tu token es: " + token);
+      // Configuración de cookieOptions
+      const cookieOptions = {
+        maxAge: 86400000, // Duración de la cookie en milisegundos (1 día)
+        httpOnly: true,
+        sameSite: "None",
+      };
+
+      res.cookie("jwtCookie", token, cookieOptions);
       const userId = req.user._id;
+
       res.status(200).send({
         userId,
+        userEmail,
         token,
+        cookieOptions,
         cart: userCart,
-        payload: "Sesion Iniciada",
+        payload: "Sesión Iniciada",
         status: "success",
       });
     } else {
       res.status(504).send({
-        payload: "Usted ya ha iniciado sesion",
+        payload: "Usted ya ha iniciado sesión",
         status: "Error",
       });
     }
   } catch (error) {
     console.error("Error al iniciar sesión:", error);
-    res.status(500).send({ mensaje: `Error al iniciar sesion ${error}` });
+    res.status(500).send({ mensaje: `Error al iniciar sesión ${error}` });
   }
 };
 export const register = async (req, res) => {

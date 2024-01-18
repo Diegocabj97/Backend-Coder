@@ -1,5 +1,5 @@
 import "dotenv/config";
-import jwt from "jsonwebtoken";
+import jwt, { decode } from "jsonwebtoken";
 export const generateToken = (user) => {
   try {
     const token = jwt.sign({ user }, process.env.JWT_SECRET, {
@@ -23,15 +23,15 @@ export const authToken = (req, res, next) => {
 
   const token = authHeader.split(" ")[1]; //Obtengo el token y descarto el Bearer
 
-  jwt.sign(token, process.env.JWT_SECRET, (error, credential) => {
+  jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
     if (error) {
       return res
         .status(403)
         .send({ error: "Usuario no autorizado, token invalido" });
     }
-  });
 
-  //Usuario valido
-  req.user = credential.user;
-  next();
+    //Usuario valido
+    req.user = decoded.user;
+    next();
+  });
 };

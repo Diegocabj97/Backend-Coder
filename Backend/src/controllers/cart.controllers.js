@@ -25,7 +25,6 @@ export const getCart = async (req, res) => {
 };
 export const postCart = async (req, res) => {
   const { cid, pid } = req.params;
-
   try {
     const cart = await CartModel.findById(cid).populate("products");
     if (cart) {
@@ -126,6 +125,54 @@ export const putCart = async (req, res) => {
     });
   }
 };
+export const removeProductFromCart = async (req, res) => {
+  const { cid, pid } = req.params;
+
+  try {
+    const cart = await CartModel.findById(cid);
+    if (cart) {
+      const productIndex = cart.products.findIndex(
+        (product) => product._id._id.toString() === pid
+      );
+
+      if (productIndex !== -1) {
+        // Elimina el producto del arreglo
+        cart.products.splice(productIndex, 1);
+
+        // Recalcula el total
+        const total = cart.products.reduce(
+          (acc, item) => acc + item.quantity * item._id.price,
+          0
+        );
+
+        // Actualiza el carrito en la base de datos
+        cart.default = [{ products: cart.products, total }];
+        await cart.save();
+
+        return res.status(200).send({
+          status: "success",
+          payload: "Producto eliminado del carrito",
+        });
+      } else {
+        return res.status(404).send({
+          status: "error",
+          payload: "Producto no encontrado en el carrito",
+        });
+      }
+    } else {
+      return res.status(404).send({
+        status: "error",
+        payload: "Carrito no encontrado",
+      });
+    }
+  } catch (error) {
+    return res.status(500).send({
+      status: "error",
+      payload: error,
+    });
+  }
+};
+
 export const deleteCart = async (req, res) => {
   const { cid } = req.params;
 

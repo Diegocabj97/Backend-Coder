@@ -10,7 +10,7 @@ const generarCodeUnico = () => {
 };
 export const postCompra = async (req, res) => {
   const cartId = req.params.cid;
-  const userEmail = req.user.email;
+  const userEmail = req.user ? req.user.email : req.headers["user-email"];
 
   try {
     const cart = await CartModel.findById(cartId).populate("products._id");
@@ -18,7 +18,9 @@ export const postCompra = async (req, res) => {
     if (!cart) {
       return res.status(404).send("Carrito no encontrado");
     }
-
+    if (cart.products.length === 0) {
+      return null;
+    }
     let insufficientStock = false;
 
     for (const item of cart.products) {
@@ -65,7 +67,7 @@ export const postCompra = async (req, res) => {
         purchaser: cart._id,
         code: generarCodeUnico(),
       });
-      console.log("Productos del carrito" + cart.products);
+      console.log("Productos del carrito" + ticket);
       await ticket.save();
       sendTicketToEmail(ticket);
       cart.products = [];

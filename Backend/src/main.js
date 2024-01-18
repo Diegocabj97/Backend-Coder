@@ -28,7 +28,12 @@ import { BACKEND_URL, FRONTEND_URL, MY_EMAIL, PORT } from "./config.js";
 //////////////////////
 
 // CORS OPTIONS
-const whiteList = [FRONTEND_URL, BACKEND_URL];
+const whiteList = [
+  FRONTEND_URL,
+  BACKEND_URL,
+  "http://localhost:5174",
+  "http://localhost:5173",
+];
 const corsOptions = {
   origin: function (origin, callback) {
     if (whiteList.indexOf(origin) != -1 || !origin) {

@@ -14,12 +14,11 @@ const ExtractJWT = jwt.ExtractJwt; //Extrar de las cookies el token
 const initializePassport = () => {
   const cookieExtractor = (req) => {
     //En lugar de tomar de las cookies directamente todo de la peticion
-
     const token = req.signedCookies.jwtCookie
       ? req.signedCookies.jwtCookie
       : req.cookies.jwtCookie;
-    console.log("cookieExtractor", token);
 
+    console.log("cookieExtractor", token);
     return token;
   };
 
